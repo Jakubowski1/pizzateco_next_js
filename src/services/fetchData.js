@@ -7,9 +7,10 @@ const fetchData = async (page, limit) => {
       params: {
         limit,
         skip,
-        select: 'name,image',
+        
       },
     });
+    console.log(response.data.recipes);
     return response.data.recipes; 
   } catch (error) {
     console.error('Error fetching data:', error);

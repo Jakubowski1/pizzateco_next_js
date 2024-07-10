@@ -12,12 +12,18 @@ padding: 0;
 justify-content: center;
 `;
 
+const Image = styled.img`
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+`;
+
 function App() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const recipesPerPage = 10; 
-
+  const recipesPerPage = 9; 
+  const background = 'backgroundPicture.png';
 
 
   useEffect(() => {
@@ -41,16 +47,19 @@ function App() {
 
   return (
     <div className="container">
+       <Image src={background} alt="photo"/>
       <Container>
 
- 
+  
         {recipes && recipes.map((recipe) => (
         <Recipes key={recipe.id} recipe={recipe} />
-      ))}
-           </Container>
+        ))}
+      </Container>
       <Pagination loading={loading} loadMore={loadMore} />
     </div>
+    
   );
+  
 }
 
 export default App;

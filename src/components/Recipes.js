@@ -2,17 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Box = styled.li`
-  list-style: none;
+
   border: 1px solid #ccc;
   border-radius: 10px;
+  overflow: hidden;
   width: 500px;
   height:700px;
   margin: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-family: 'Nunito Sans';
-  font-weight: 400;
+  display: flex;
+  flex-direction: column;
 `;
-
 const Image = styled.img`
   width: 100%;
   height: 150px;
@@ -20,8 +20,12 @@ const Image = styled.img`
 `;
 
 const Content = styled.div`
+  display: flex;
+  flex-direction:column;
+  flex-grow:1;
   padding: 20px;
   text-align: left;
+  justify-content: space-between;
 `;
 
 const Title = styled.h2`
@@ -59,9 +63,9 @@ const Tag1 = styled.span`
 `;
 const Tag2 = styled.span`
   
-  color: #C65F00;
+  color: #D20C0C;
   padding: 5px 10px;
-  border: 1px solid #C65F00;
+  border: 1px solid #D20C0C;
   border-radius: 25px;
   font-size: 0.8em;
 `;
@@ -72,6 +76,7 @@ const Info = styled.div`
 `;
 
 const InfoItem = styled.div`
+justify-content: space-between;
   display: flex;
   align-items: center;
   font-size: 0.9em;
@@ -82,6 +87,7 @@ const Icon = styled.span`
 `;
 
 const Difficulty = styled.div`
+  position:relative;
   background: ${(props) => props.color[0] || '#ccc'};
   color:  ${(props) => props.color[1] || '#ccc'};
   padding: 5px 10px;
@@ -104,31 +110,31 @@ const Recipes = ({ recipe }) => {
 
   return (
     <Box>
-    <Image src={recipe.image} alt={recipe.name} />
-    <Content>
-      <Tags>
-        {recipe.tags.map((tag) => (
+      <Image src={recipe.image} alt={recipe.name} />
+      <Content>
+        <Tags>
+          {recipe.tags.map((tag) => (
           <Tag key={tag}>
             {tag}
           </Tag>
-        ))}
-      </Tags>
-      <Title>{recipe.name}</Title>
-      <Info>
-        <InfoItem>
-          <Icon>🍴</Icon>
-          <span>Cuisine <Tag1 >{recipe.cuisine}</Tag1></span>
-        </InfoItem>
-        <InfoItem>
-          <Icon>⏲</Icon>
-          <span>Cooking Time <Tag2 color="#3498db">{recipe.cookTimeMinutes} min</Tag2></span>
-        </InfoItem>
-      </Info>
-      <Difficulty color={difficultyColors[recipe.difficulty]}>
-        {recipe.difficulty}
-      </Difficulty>
-    </Content>
-  </Box>
+          ))}
+        </Tags>
+        <Title>{recipe.name}</Title>
+        <Info>
+          <InfoItem>
+            <Icon>🍴Cuisine</Icon>
+            <Tag1>{recipe.cuisine}</Tag1>
+          </InfoItem>
+          <InfoItem>
+            <Icon>⏲ Cooking Time</Icon>
+            <Tag2>{recipe.cookTimeMinutes} min</Tag2>
+          </InfoItem>
+        </Info>
+        <Difficulty color={difficultyColors[recipe.difficulty]}>
+          {recipe.difficulty}
+        </Difficulty>
+      </Content>
+    </Box>
   );
 };
 

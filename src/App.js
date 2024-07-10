@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router,Route,Routes, Link, useNavigate} from 'react-router-dom';
 import './App.css';
 import Recipes from './components/Recipes';
 import styled from 'styled-components';
 import fetchData from './services/fetchData'; 
 import Pagination from './components/Pagination'; 
+import Details from "./components/Details";
+
+
+
 
 const Container = styled.ul`
 display: flex;
@@ -17,7 +22,10 @@ const Image = styled.img`
   height: 300px;
   object-fit: cover;
 `;
-
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
 function App() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -44,22 +52,31 @@ function App() {
   const loadMore = () => {
     setPage(prevPage => prevPage + 1);
  };
-
-  return (
-    <div className="container">
-       <Image src={background} alt="photo"/>
-      <Container>
-
-  
-        {recipes && recipes.map((recipe) => (
-        <Recipes key={recipe.id} recipe={recipe} />
-        ))}
-      </Container>
-      <Pagination loading={loading} loadMore={loadMore} />
-    </div>
-    
-  );
-  
+ return (
+  <div className="container">
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <Image src={background} alt="photo" />
+              <Container>
+                {recipes.map((recipe) => (
+                  <StyledLink key={recipe.id} to={`/details/${recipe.name}`}>
+                    <Recipes recipe={recipe} />
+                  </StyledLink>
+                ))}
+              </Container>
+              <Pagination loading={loading} loadMore={loadMore} />
+            </div>
+          }
+        />
+        <Route path="/details/:name" element={<Details />} />
+      </Routes>
+    </Router>
+  </div>
+);
 }
 
 export default App;

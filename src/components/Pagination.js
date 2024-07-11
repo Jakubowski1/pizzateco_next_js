@@ -7,21 +7,22 @@ const PaginationContainer = styled.nav`
 `;
 
 const LoadMoreButton = styled.button`
-  background-color: #007bff;
-  color: white;
-  border: none;
+  background: white;
+  font-family: "Just Me Again Down Here", cursive;
+  font-size: 32px;
+  color: black;
+  border: 1px solid black;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 10px;
+  margin:40px 0px;
+  padding: 4px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-
   &:hover {
-    background-color: #0056b3;
+   box-shadow: 0px 0px 10px #FF990066;
   }
-
   &:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
+   display:none;
   }
 `;
 
@@ -29,7 +30,7 @@ const Pagination = ({ loading, loadMore }) => {
   return (
     <PaginationContainer>
       <LoadMoreButton onClick={loadMore} disabled={loading}>
-        {loading ? 'Loading...' : 'Load More'}
+        {loading ? 'Loading...' : 'Load more'}
       </LoadMoreButton>
     </PaginationContainer>
   );

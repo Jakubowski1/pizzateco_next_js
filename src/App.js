@@ -8,23 +8,26 @@ import Pagination from './components/Pagination';
 import Details from "./components/Details";
 
 
-
-
 const Container = styled.ul`
 display: flex;
 flex-wrap: wrap;
 padding: 0;
 justify-content: center;
+background: #fffbeb;
 `;
 
 const Image = styled.img`
   width: 100%;
   height: 300px;
   object-fit: cover;
+  background: #fffbeb;
+
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
+  background: #fffbeb;
+
 `;
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -63,7 +66,7 @@ function App() {
               <Image src={background} alt="photo" />
               <Container>
                 {recipes.map((recipe) => (
-                  <StyledLink key={recipe.id} to={`/details/${recipe.name}`}>
+                  <StyledLink key={recipe.id} to={`/details/${recipe.id}/${recipe.name}`}>
                     <Recipes recipe={recipe} />
                   </StyledLink>
                 ))}
@@ -72,7 +75,7 @@ function App() {
             </div>
           }
         />
-        <Route path="/details/:name" element={<Details />} />
+        <Route path="/details/:id/:name" element={<Details />} />
       </Routes>
     </Router>
   </div>

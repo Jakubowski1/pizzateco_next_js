@@ -12,6 +12,15 @@ const Box = styled.li`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  transition: box-shadow .3s;
+   &:hover {
+  
+box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 0px, 
+            rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+            rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+            rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+            rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
 `;
 const Image = styled.img`
   width: 100%;

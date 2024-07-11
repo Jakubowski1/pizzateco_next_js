@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import fetchRecipe from '../services/fetchRecipe';
-import styled from 'styled-components';
-import logo from '../assets/header.png';
-import Header from './Header';
-import RecipeImage from './RecipeImage';
-import RecipeInfo from './RecipeInfo';
-import RecipeInstructions from './RecipeInstructions';
-import RecipeIngredients from './RecipeIngredients';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import fetchRecipe from "../../services/fetchRecipe";
+import styled from "styled-components";
+import logo from "../../assets/header.png";
+import Header from "./Header";
+import RecipeImage from "./RecipeImage";
+import RecipeInfo from "./RecipeInfo";
+import RecipeInstructions from "./RecipeInstructions";
+import RecipeIngredients from "./RecipeIngredients";
 
 const Container = styled.div`
   display: flex;
@@ -15,12 +15,10 @@ const Container = styled.div`
   gap: 30px;
   justify-content: space-between;
   text-align: center;
-  
 `;
 const Main = styled.div`
-background: #fffbeb;
- font-family: "Nunito Sans", sans-serif;
-
+  background: #fffbeb;
+  font-family: "Nunito Sans", sans-serif;
 `;
 const Back = styled.button`
   background: white;
@@ -57,12 +55,12 @@ export default function Details() {
       setLoading(true);
       try {
         const newRecipe = await fetchRecipe(id);
-        setRecipe(prevRecipe => ({
+        setRecipe((prevRecipe) => ({
           ...prevRecipe,
-          ...newRecipe
+          ...newRecipe,
         }));
       } catch (error) {
-        console.error('Error fetching recipe:', error);
+        console.error("Error fetching recipe:", error);
       } finally {
         setLoading(false);
       }
@@ -70,32 +68,33 @@ export default function Details() {
 
     getRecipes();
   }, [id]);
-  
 
   if (loading) {
     return <div>Loading...</div>;
   }
-  
+
   return (
     <Main>
       <Container>
-        <Back>
-          Go back
-        </Back>
-        <img src={logo} alt='logo' style={{ width: '80%', objectFit: 'cover' }} />
+        <Back>Go back</Back>
+        <img
+          src={logo}
+          alt="logo"
+          style={{ width: "80%", objectFit: "cover" }}
+        />
       </Container>
-     
-      <div style={{ display: 'flex', gap: '30px'}}>
+
+      <div style={{ display: "flex", gap: "30px" }}>
         <RecipeImage src={recipe.image} alt={recipe.name} />
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Header title={recipe.name} tags={recipe.tags} />
-        <RecipeInfo recipe={recipe} />
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <Header title={recipe.name} tags={recipe.tags} />
+          <RecipeInfo recipe={recipe} />
         </div>
       </div>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: "flex" }}>
         <RecipeInstructions instructions={recipe.instructions} />
         <RecipeIngredients ingredients={recipe.ingredients} />
       </div>
-      </Main>
+    </Main>
   );
 }

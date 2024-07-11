@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Tags = styled.div`
   display: flex;
@@ -9,9 +9,9 @@ const Tags = styled.div`
 `;
 
 const Tag = styled.span`
-  color: #FF9900;
+  color: #ff9900;
   padding: 2px 20px;
-  border: 1px solid #FF9900;
+  border: 1px solid #ff9900;
   border-radius: 10px;
   font-size: 16px;
 `;
@@ -28,13 +28,12 @@ const Title = styled.h2`
 
 const Header = ({ title, tags }) => (
   <div>
-     <Tags>
+    <Tags>
       {tags?.map((tag) => (
         <Tag key={tag}>{tag}</Tag>
       ))}
     </Tags>
     <Title>{title}</Title>
-   
   </div>
 );
 

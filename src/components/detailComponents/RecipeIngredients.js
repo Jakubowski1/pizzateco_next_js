@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Instruction = styled.ul`
   font-size: 32px;
 `;
 
 const Item = styled.li`
- font-family: "Nunito Sans", sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   font-size: 24px;
 `;
 const Container = styled.div`
@@ -15,18 +15,16 @@ const Container = styled.div`
   border: 1px solid black;
   border-radius: 10px;
   padding: 0 40px 40px 40px;
-
 `;
 
-
 const RecipeIngredients = ({ ingredients }) => (
-<Container>
-        Ingredients
+  <Container>
+    Ingredients
     <Instruction>
-    {ingredients?.map((ingredient, index) => (
-      <Item key={index}>{ingredient}</Item>
-    )) || <Item>No ingredients available</Item>}
-  </Instruction>
+      {ingredients?.map((ingredient, index) => (
+        <Item key={index}>{ingredient}</Item>
+      )) || <Item>No ingredients available</Item>}
+    </Instruction>
   </Container>
 );
 

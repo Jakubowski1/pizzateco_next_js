@@ -1,50 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import './App.css';
-import Recipes from './components/Recipes';
-import styled from 'styled-components';
-import fetchData from './services/fetchData'; 
-import Pagination from './components/Pagination'; 
-import Details from "./components/Details";
-
-const Container = styled.ul`
-  font-family: "Nunito Sans", sans-serif;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-  justify-content: center;
-  margin:0;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-`;
+import React, { useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import "./styles/App.css";
+import Recipes from "./components/mainComponents/Recipes";
+import fetchData from "./services/fetchData";
+import Pagination from "./components/mainComponents/Pagination";
+import Details from "./components/detailComponents/Details";
+import { Container, Image, StyledLink } from "./styles/appStyles";
+import Filters from "./components/mainComponents/Filters";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const recipesPerPage = 9; 
-  const background = 'backgroundPicture.png';
+  const [activeButton, setActiveButton] = useState(0);
+  const [query, setQuery] = useState("");
+  const [hasMore, setHasMore] = useState(true);
+  const recipesPerPage = 9;
+  const background = "backgroundPicture.png";
+  const difficultyColors = {
+    Easy: ["#E6F7E5", "#04B100"],
+    Medium: ["#FFF5E5", "#FF9900"],
+    Hard: ["#FAE7E7", "#D20C0C"],
+    All: ["#E9EDFD", "#244FE9"],
+  };
 
   useEffect(() => {
     const getRecipes = async () => {
       setLoading(true);
       const newRecipes = await fetchData(page, recipesPerPage);
-      setRecipes(prevRecipes => {
-        const recipeNames = new Set(prevRecipes.map(recipe => recipe.name));
-        const filteredRecipes = newRecipes.filter(recipe => !recipeNames.has(recipe.name));
+      setRecipes((prevRecipes) => {
+        const recipeNames = new Set(prevRecipes.map((recipe) => recipe.name));
+        const filteredRecipes = newRecipes.filter(
+          (recipe) => !recipeNames.has(recipe.name)
+        );
         return [...prevRecipes, ...filteredRecipes];
       });
-      setLoading(false);
+      setHasMore(newRecipes.length === recipesPerPage);
     };
     getRecipes();
   }, [page]);
@@ -57,33 +49,42 @@ function App() {
     if (!query) {
       return recipes;
     }
-    return recipes.filter(recipe => recipe.name.toLowerCase().includes(query.toLowerCase()));
-  }
+    return recipes.filter((recipe) =>
+      recipe.name.toLowerCase().includes(query.toLowerCase())
+    );
+  };
 
-  const [query, setQuery] = useState("");
   const searchRecipes = getFilteredRecipes(query, filteredRecipes);
 
   const loadMore = () => {
-    setPage(prevPage => prevPage + 1);
+    setPage((prevPage) => prevPage + 1);
   };
 
   const handleFilter = (level) => {
     let recipesByLevel;
     switch (level) {
       case 1:
-        recipesByLevel = recipes.filter(recipe => recipe.difficulty === "Easy");
+        recipesByLevel = recipes.filter(
+          (recipe) => recipe.difficulty === "Easy"
+        );
         break;
       case 2:
-        recipesByLevel = recipes.filter(recipe => recipe.difficulty === "Medium");
+        recipesByLevel = recipes.filter(
+          (recipe) => recipe.difficulty === "Medium"
+        );
         break;
       case 3:
-        recipesByLevel = recipes.filter(recipe => recipe.difficulty === "Hard");
+        recipesByLevel = recipes.filter(
+          (recipe) => recipe.difficulty === "Hard"
+        );
         break;
       case 0:
+      default:
         recipesByLevel = recipes;
     }
     setFilteredRecipes(recipesByLevel);
-  }
+    setActiveButton(level);
+  };
 
   return (
     <div>
@@ -93,21 +94,43 @@ function App() {
           element={
             <div>
               <Image src={background} alt="photo" />
+              <Filters
+                query={query}
+                setQuery={setQuery}
+                handleFilter={handleFilter}
+                activeButton={activeButton}
+                difficultyColors={difficultyColors}
+              />
               <Container>
-                <label>Search</label>
-                <input type="text" onChange={e => setQuery(e.target.value)} />
-                <button onClick={() => handleFilter(0)}>All</button>
-                <button onClick={() => handleFilter(1)}>Easy</button>
-                <button onClick={() => handleFilter(2)}>Medium</button>
-                <button onClick={() => handleFilter(3)}>Hard</button>
-
-                {searchRecipes.map((recipe) => (
-                  <StyledLink key={recipe.id} to={`/details/${recipe.id}/${recipe.name}`}>
-                    <Recipes recipe={recipe} />
-                  </StyledLink>
-                ))}
+                {searchRecipes.length === 0 ? (
+                  <p
+                    style={{
+                      fontFamily: '"Just Me Again Down Here", cursive',
+                      fontSize: "80px",
+                      marginTop: "80px",
+                      textAlign: "center",
+                    }}
+                  >
+                    Sorry, looks like nothing matches your filters :(
+                  </p>
+                ) : (
+                  searchRecipes.map((recipe) => (
+                    <StyledLink
+                      key={recipe.id}
+                      to={`/details/${recipe.id}/${recipe.name}`}
+                    >
+                      <Recipes recipe={recipe} />
+                    </StyledLink>
+                  ))
+                )}
               </Container>
-              <Pagination loading={loading} loadMore={loadMore} />
+              {searchRecipes.length > 0 && (
+                <Pagination
+                  loading={loading}
+                  loadMore={loadMore}
+                  hasMore={hasMore}
+                />
+              )}
             </div>
           }
         />

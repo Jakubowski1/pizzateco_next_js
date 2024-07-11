@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const PaginationContainer = styled.nav`
+  background:  #fffbeb;
   text-align: center;
-  margin-top: 20px;
 `;
 
 const LoadMoreButton = styled.button`
-  background: white;
+ 
   font-family: "Just Me Again Down Here", cursive;
   font-size: 32px;
   color: black;

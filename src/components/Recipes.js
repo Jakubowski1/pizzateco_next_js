@@ -8,7 +8,7 @@ const Box = styled.li`
   overflow: hidden;
   width: 420px;
   height:588px;
-  margin: 20px 40px 20px 40px;
+  margin: 20px 40px 0px 40px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;

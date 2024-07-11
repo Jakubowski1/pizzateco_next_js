@@ -9,24 +9,26 @@ import Details from "./components/Details";
 
 
 const Container = styled.ul`
+  font-family: "Nunito Sans", sans-serif;
 display: flex;
 flex-wrap: wrap;
 padding: 0;
 justify-content: center;
-background: #fffbeb;
+
+margin:0;
 `;
 
 const Image = styled.img`
   width: 100%;
   height: 300px;
   object-fit: cover;
-  background: #fffbeb;
+  
 
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
-  background: #fffbeb;
+  
 
 `;
 function App() {
@@ -38,7 +40,7 @@ function App() {
 
 
   useEffect(() => {
-    const getRecipes = async () => {
+      const getRecipes = async () => {
       setLoading(true);
       const newRecipes = await fetchData(page, recipesPerPage);
       setRecipes(prevRecipes => {
@@ -56,7 +58,7 @@ function App() {
     setPage(prevPage => prevPage + 1);
  };
  return (
-  <div className="container">
+  <div >
     <Router>
       <Routes>
         <Route

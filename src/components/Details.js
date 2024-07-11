@@ -70,11 +70,12 @@ export default function Details() {
 
     getRecipes();
   }, [id]);
+  
 
   if (loading) {
     return <div>Loading...</div>;
   }
-
+  
   return (
     <Main>
       <Container>
@@ -83,7 +84,7 @@ export default function Details() {
         </Back>
         <img src={logo} alt='logo' style={{ width: '80%', objectFit: 'cover' }} />
       </Container>
-      
+     
       <div style={{ display: 'flex', gap: '30px'}}>
         <RecipeImage src={recipe.image} alt={recipe.name} />
         <div style={{ display: 'flex', flexDirection: 'column' }}>

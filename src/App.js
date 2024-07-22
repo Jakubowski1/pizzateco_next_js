@@ -3,15 +3,15 @@ import { Route, Routes } from "react-router-dom";
 import "./styles/App.css";
 import Recipes from "./components/mainComponents/Recipes";
 import fetchData from "./services/fetchData";
-import Pagination from "./components/mainComponents/Pagination";
 import Details from "./components/detailComponents/Details";
-import { Container, Image, StyledLink } from "./styles/appStyles";
-import Filters from "./components/mainComponents/Filters";
+import { Container, Image, StyledLink, Footer } from "./styles/appStyles";
+import Filters from "./components/sideComponents/Filters";
+import usePageBottom from "./utils/usePageBottom"; // Import the hook
 
 function App() {
   const [recipes, setRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [activeButton, setActiveButton] = useState(0);
   const [query, setQuery] = useState("");
@@ -26,9 +26,11 @@ function App() {
   };
 
   useEffect(() => {
-    const getRecipes = async () => {
-      setLoading(true);
+    const initialLoad = async () => {
       const newRecipes = await fetchData(page, recipesPerPage);
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      setLoading(false);
+
       setRecipes((prevRecipes) => {
         const recipeNames = new Set(prevRecipes.map((recipe) => recipe.name));
         const filteredRecipes = newRecipes.filter(
@@ -38,7 +40,7 @@ function App() {
       });
       setHasMore(newRecipes.length === recipesPerPage);
     };
-    getRecipes();
+    initialLoad();
   }, [page]);
 
   useEffect(() => {
@@ -86,56 +88,68 @@ function App() {
     setActiveButton(level);
   };
 
+  usePageBottom(loadMore); // Use the hook
+
   return (
     <div>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              <Image src={background} alt="photo" />
-              <Filters
-                query={query}
-                setQuery={setQuery}
-                handleFilter={handleFilter}
-                activeButton={activeButton}
-                difficultyColors={difficultyColors}
-              />
-              <Container>
-                {searchRecipes.length === 0 ? (
-                  <p
-                    style={{
-                      fontFamily: '"Just Me Again Down Here", cursive',
-                      fontSize: "80px",
-                      marginTop: "80px",
-                      textAlign: "center",
-                    }}
-                  >
-                    Sorry, looks like nothing matches your filters :(
-                  </p>
-                ) : (
-                  searchRecipes.map((recipe) => (
-                    <StyledLink
-                      key={recipe.id}
-                      to={`/details/${recipe.id}/${recipe.name}`}
-                    >
-                      <Recipes recipe={recipe} />
-                    </StyledLink>
-                  ))
-                )}
-              </Container>
-              {searchRecipes.length > 0 && (
-                <Pagination
-                  loading={loading}
-                  loadMore={loadMore}
-                  hasMore={hasMore}
+      {loading ? (
+        <div className="loader-container">
+          <div className="pizza-loader">
+            <div className="pizza-slice"></div>
+          </div>
+        </div>
+      ) : (
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div>
+                <Image src={background} alt="photo" />
+                <Filters
+                  query={query}
+                  setQuery={setQuery}
+                  handleFilter={handleFilter}
+                  activeButton={activeButton}
+                  difficultyColors={difficultyColors}
                 />
-              )}
-            </div>
-          }
-        />
-        <Route path="/details/:id/:name" element={<Details />} />
-      </Routes>
+                <Container>
+                  {searchRecipes.length === 0 ? (
+                    <p
+                      style={{
+                        fontFamily: '"Just Me Again Down Here", cursive',
+                        fontSize: "80px",
+                        marginTop: "80px",
+                        textAlign: "center",
+                      }}
+                    >
+                      Sorry, looks like nothing matches your filters :(
+                    </p>
+                  ) : (
+                    searchRecipes.map((recipe) => (
+                      <StyledLink
+                        key={recipe.id}
+                        to={`/details/${recipe.id}/${recipe.name}`}
+                      >
+                        <Recipes recipe={recipe} />
+                      </StyledLink>
+                    ))
+                  )}
+                </Container>
+                {!loading && hasMore ? (
+                  <Footer>Loading more recipes...</Footer>
+                ) : (
+                  <div
+                    style={{
+                      margin: "20px",
+                    }}
+                  ></div>
+                )}
+              </div>
+            }
+          />
+          <Route path="/details/:id/:name" element={<Details />} />
+        </Routes>
+      )}
     </div>
   );
 }

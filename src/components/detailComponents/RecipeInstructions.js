@@ -12,6 +12,7 @@ const Item = styled.li`
 const Container = styled.div`
   font-family: "Just Me Again Down Here", cursive;
   font-size: 64px;
+  width: 610px;
 `;
 
 const RecipeInstructions = ({ instructions }) => (

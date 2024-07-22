@@ -9,6 +9,7 @@ const Info = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 600px;
 `;
 
 const InfoItem = styled.div`
@@ -54,24 +55,35 @@ const RecipeInfo = ({ recipe }) => {
     "#000",
   ];
 
+  const Box = styled.div`
+    justify-content: space-between;
+  `;
   return (
     <Info>
       <InfoItem>
-        <Icon src={level} alt="icon" />
-        Level
+        <Box>
+          <Icon src={level} alt="icon" />
+          Level
+        </Box>
         <Difficulty color={difficultyColor}>{recipe.difficulty}</Difficulty>
       </InfoItem>
       <InfoItem>
-        <Icon src={serving} alt="icon" />
-        Servings
+        <Box>
+          <Icon src={serving} alt="icon" />
+          Servings
+        </Box>
         <Tag>{recipe.servings}</Tag>
       </InfoItem>
       <InfoItem>
-        <Icon src={cuisine} alt="icon" /> Cuisine
+        <Box>
+          <Icon src={cuisine} alt="icon" /> Cuisine
+        </Box>
         <Tag color="#244FE9">{recipe.cuisine}</Tag>
       </InfoItem>
       <InfoItem>
-        <Icon src={cooking} alt="photo" /> Cooking Time
+        <Box>
+          <Icon src={cooking} alt="photo" /> Cooking Time
+        </Box>
         <Tag color="#D20C0C">{recipe.cookTimeMinutes} min</Tag>
       </InfoItem>
     </Info>

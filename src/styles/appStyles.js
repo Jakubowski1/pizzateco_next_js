@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.ul`
@@ -20,4 +20,18 @@ export const Image = styled.img`
 export const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
+`;
+
+const blink = keyframes`
+  50% {
+    opacity: 0.3;
+  }
+`;
+
+export const Footer = styled.div`
+  text-align: center;
+  font-family: "Just Me Again Down Here", cursive;
+  padding: 20px;
+  font-size: 50px;
+  animation: ${blink} 1s ease-in infinite;
 `;

@@ -15,6 +15,7 @@ const Container = styled.div`
   border: 1px solid black;
   border-radius: 10px;
   padding: 0 40px 40px 40px;
+  width: 610px;
 `;
 
 const RecipeIngredients = ({ ingredients }) => (

@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const Image = styled.img`
-  width: 30%;
+  width: 660px;
+  height: 460px;
   object-fit: cover;
   border: 1px solid black;
 `;

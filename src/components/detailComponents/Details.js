@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import fetchRecipe from "../../services/fetchRecipe";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import fetchRecipe from "../../services/fetchRecipe";
 import logo from "../../assets/header.png";
 import Header from "./Header";
 import RecipeImage from "./RecipeImage";
@@ -9,49 +9,74 @@ import RecipeInfo from "./RecipeInfo";
 import RecipeInstructions from "./RecipeInstructions";
 import RecipeIngredients from "./RecipeIngredients";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-  justify-content: space-between;
-  text-align: center;
-`;
 const Main = styled.div`
   background: #fffbeb;
   font-family: "Nunito Sans", sans-serif;
+  padding: 20px;
+  margin: 0 200px;
 `;
-const Back = styled.button`
+
+const Container = styled.div`
+  margin-left: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 90px;
+  text-align: center;
+  margin-bottom: 40px;
+  justify-content: space-between;
+`;
+
+const Logo = styled.img`
+  width: 80%;
+  object-fit: cover;
+  margin-bottom: 20px;
+`;
+
+const BackButton = styled.button`
   background: white;
   font-family: "Just Me Again Down Here", cursive;
-  font-size: 32px;
+  font-size: 24px;
   color: black;
   height: 48px;
   width: 130px;
   border: 1px solid black;
   display: flex;
   justify-content: center;
+  min-width: 130px;
   align-items: center;
   border-radius: 10px;
-  margin: 40px 0px 40px 50px;
   padding: 4px 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: box-shadow 0.3s ease;
+  margin-bottom: 20px;
   &:hover {
     box-shadow: 0px 0px 10px #ff990066;
   }
-  &:disabled {
-    display: none;
-  }
+`;
+
+const FlexRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+  min-gap: 50px;
+`;
+
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 export default function Details() {
+  const navigate = useNavigate();
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(false);
-  const params = useParams();
-  const id = params.id;
+  const { id } = useParams();
 
   useEffect(() => {
-    const getRecipes = async () => {
+    const fetchRecipes = async () => {
       setLoading(true);
       try {
         const newRecipe = await fetchRecipe(id);
@@ -66,7 +91,7 @@ export default function Details() {
       }
     };
 
-    getRecipes();
+    fetchRecipes();
   }, [id]);
 
   if (loading) {
@@ -74,27 +99,25 @@ export default function Details() {
   }
 
   return (
-    <Main>
+    <>
       <Container>
-        <Back>Go back</Back>
-        <img
-          src={logo}
-          alt="logo"
-          style={{ width: "80%", objectFit: "cover" }}
-        />
+        <BackButton onClick={() => navigate(-1)}>Go back</BackButton>
+        <Logo src={logo} alt="logo" />
       </Container>
+      <Main>
+        <FlexRow>
+          <RecipeImage src={recipe.image} alt={recipe.name} />
+          <FlexColumn>
+            <Header title={recipe.name} tags={recipe.tags} />
+            <RecipeInfo recipe={recipe} />
+          </FlexColumn>
+        </FlexRow>
 
-      <div style={{ display: "flex", gap: "30px" }}>
-        <RecipeImage src={recipe.image} alt={recipe.name} />
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <Header title={recipe.name} tags={recipe.tags} />
-          <RecipeInfo recipe={recipe} />
-        </div>
-      </div>
-      <div style={{ display: "flex" }}>
-        <RecipeInstructions instructions={recipe.instructions} />
-        <RecipeIngredients ingredients={recipe.ingredients} />
-      </div>
-    </Main>
+        <FlexRow>
+          <RecipeInstructions instructions={recipe.instructions} />
+          <RecipeIngredients ingredients={recipe.ingredients} />
+        </FlexRow>
+      </Main>
+    </>
   );
 }

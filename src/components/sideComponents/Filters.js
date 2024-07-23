@@ -30,7 +30,7 @@ const Filters = ({
           type="text"
           onChange={(e) => setQuery(e.target.value)}
           value={query}
-        />
+        ></SearchInput>
       </SearchBoxWrapper>
       <ButtonContainer>
         <Button
@@ -79,20 +79,20 @@ const Filters = ({
         >
           Hard
         </Button>
-        <SelectContainer>
-          <Select
-            onChange={(e) => handleFilter(parseInt(e.target.value))}
-            onClick={() => setOpen(!open)}
-            onBlur={() => setOpen(false)}
-          >
-            <option value="0">All</option>
-            <option value="1">Easy</option>
-            <option value="2">Medium</option>
-            <option value="3">Hard</option>
-          </Select>
-          <ArrowIcon src={arrow} open={open} />
-        </SelectContainer>
       </ButtonContainer>
+      <SelectContainer>
+        <Select
+          onChange={(e) => handleFilter(parseInt(e.target.value))}
+          onClick={() => setOpen(!open)}
+          onBlur={() => setOpen(false)}
+        >
+          <option value="0">All</option>
+          <option value="1">Easy</option>
+          <option value="2">Medium</option>
+          <option value="3">Hard</option>
+        </Select>
+        <ArrowIcon src={arrow} open={open} />
+      </SelectContainer>
     </FlexContainer>
   );
 };

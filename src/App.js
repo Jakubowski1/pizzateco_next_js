@@ -6,7 +6,7 @@ import fetchData from "./services/fetchData";
 import Details from "./components/detailComponents/Details";
 import { Container, Image, StyledLink, Footer } from "./styles/appStyles";
 import Filters from "./components/sideComponents/Filters";
-import usePageBottom from "./utils/usePageBottom"; // Import the hook
+import usePageBottom from "./utils/usePageBottom";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -88,7 +88,7 @@ function App() {
     setActiveButton(level);
   };
 
-  usePageBottom(loadMore); // Use the hook
+  usePageBottom(loadMore);
 
   return (
     <div>
@@ -118,7 +118,7 @@ function App() {
                       style={{
                         fontFamily: '"Just Me Again Down Here", cursive',
                         fontSize: "80px",
-                        marginTop: "80px",
+                        margin: "250px 0 100px 0",
                         textAlign: "center",
                       }}
                     >

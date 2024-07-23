@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import { shouldForwardProp } from "@styled-system/should-forward-prop";
 
-export const Button = styled.button`
+export const Button = styled.button.withConfig({
+  shouldForwardProp: (prop) =>
+    !["bgColor", "borderColor", "focusColor"].includes(prop),
+})`
   border: 1px solid black;
   border-radius: 10px;
   color: black;
@@ -23,19 +27,25 @@ export const Button = styled.button`
     border-color: ${(props) => props.focusColor[1] || "black"};
   }
 
-  @media (max-width: 1000px) {
-    display: none;
+  @media (max-width: 1290px) {
+    width: 90px;
+    height: 30px;
+    font-size: 16px;
+    padding: 4px 16px;
   }
 `;
 
 export const SearchBoxWrapper = styled.div`
   position: relative;
   width: 320px;
-  margin-left: 16%;
+
+  @media (max-width: 1290px) {
+  }
 `;
 
 export const SearchInput = styled.input`
-  width: 100%;
+  box-sizing: border-box;
+  width: 320px;
   padding: 10px 10px 10px 40px;
   border: 1px solid black;
   border-radius: 10px;
@@ -44,9 +54,6 @@ export const SearchInput = styled.input`
   &:focus {
     outline: none;
     box-shadow: 0 0 10px yellow;
-  }
-  @media (max-width: 1000px) {
-    transform: translateX(-20%);
   }
 `;
 
@@ -57,33 +64,42 @@ export const LoupeIcon = styled.img`
   transform: translateY(-50%);
   width: 25px;
   height: 25px;
+
+  @media (max-width: 1290px) {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 export const FlexContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px;
+  width: 70%;
+  margin: 20px auto;
   flex-wrap: nowrap;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1290px) {
     flex-direction: column;
     align-items: center;
-    margin: 30px;
     gap: 10px;
     justify-content: center;
   }
 `;
 
 export const SelectContainer = styled.div`
+  display: none;
   position: relative;
-  width: 200px;
-  margin: 5px;
+  width: 320px;
+
+  @media (max-width: 1290px) {
+    display: flex;
+  }
 `;
 
 export const Select = styled.select`
   display: none;
-  width: 200px;
+  width: 100%;
   padding: 10px;
   font-size: 32px;
   border-radius: 10px;
@@ -92,15 +108,16 @@ export const Select = styled.select`
   appearance: none;
   font-family: "Just Me Again Down Here", cursive;
   --highlight-color: FF9900;
+
   &:focus {
     outline: none;
     box-shadow: 0 0 10px #fff5e5;
     border-color: #fff5e5;
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1290px) {
     display: block;
-    width: 100%;
+    font-size: 24px;
   }
   option:hover {
     background-color: var(--highlight-color);
@@ -117,18 +134,16 @@ export const ArrowIcon = styled.img`
   transform: translateY(-50%)
     ${(props) => (props.open ? "rotate(180deg)" : "rotate(0deg)")};
   transition: transform 0.2s;
-  @media (max-width: 1000px) {
+
+  @media (max-width: 1290px) {
     display: block;
   }
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
-  margin: 0 100px 0 100px;
   gap: 20px;
-  @media (max-width: 1000px) {
-    margin: 0;
-
-    align-items: center;
+  @media (max-width: 1290px) {
+    display: none;
   }
 `;

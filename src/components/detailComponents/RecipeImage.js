@@ -6,6 +6,10 @@ const Image = styled.img`
   height: 460px;
   object-fit: cover;
   border: 1px solid black;
+  border-radius: 10px;
+  @media (max-width: 1760px) {
+    margin-bottom: 50px;
+  }
 `;
 
 const RecipeImage = ({ src, alt }) => <Image src={src} alt={alt} />;

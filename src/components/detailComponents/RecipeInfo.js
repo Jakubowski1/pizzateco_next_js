@@ -1,47 +1,16 @@
 import React from "react";
-import styled from "styled-components";
 import cuisine from "../../assets/cuisine.png";
 import cooking from "../../assets/time.png";
 import level from "../../assets/level.png";
 import serving from "../../assets/servings.png";
-
-const Info = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 600px;
-`;
-
-const InfoItem = styled.div`
-  justify-content: space-between;
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-`;
-
-const Icon = styled.img`
-  height: 30px;
-`;
-
-const Tag = styled.span`
-  color: ${(props) => props.color || "#000"};
-  padding: 2px 20px;
-  border: 1px solid ${(props) => props.color || "#000"};
-  border-radius: 10px;
-  font-size: 16px;
-`;
-
-const Difficulty = styled.div`
-  background: ${(props) => props.color[0] || "#ccc"};
-  color: ${(props) => props.color[1] || "#ccc"};
-  padding: 4px 20px;
-  border: 1px solid ${(props) => props.color[1]};
-  border-radius: 10px;
-  font-size: 16px;
-  text-align: left;
-  margin-top: 10px;
-  width: fit-content;
-`;
+import {
+  Info,
+  InfoItem,
+  Icon,
+  Tag,
+  Difficulty,
+  Box,
+} from "../../styles/detailStyles";
 
 const RecipeInfo = ({ recipe }) => {
   const difficultyColors = {
@@ -55,9 +24,6 @@ const RecipeInfo = ({ recipe }) => {
     "#000",
   ];
 
-  const Box = styled.div`
-    justify-content: space-between;
-  `;
   return (
     <Info>
       <InfoItem>

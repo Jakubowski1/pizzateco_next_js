@@ -7,6 +7,7 @@ import Details from "./components/detailComponents/Details";
 import { Container, Image, StyledLink, Footer } from "./styles/appStyles";
 import Filters from "./components/sideComponents/Filters";
 import usePageBottom from "./utils/usePageBottom";
+import PageNotFound from "./components/sideComponents/PageNotFound";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -148,6 +149,7 @@ function App() {
             }
           />
           <Route path="/details/:id/:name" element={<Details />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       )}
     </div>

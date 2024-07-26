@@ -1,29 +1,24 @@
-# PizzaTeco: Preparation for Software Engineering position
+## PizzaTeco: Preparation for Software Engineering Position (Version 2)
+### Overview
 
-## Overview
+This is the second version of the PizzaTeco app, now built with Next.js. Users can search for recipes by name, view detailed information about each recipe, and paginate through multiple pages of recipes. The app is built with Next.js and styled-components and utilizes a custom dummy API for fetching recipe data.
 
- Users can search for recipes by name, view detailed information about each recipe, and paginate through multiple pages of recipes. 
- The app is built with React and styled-components and utilizes a custom dummy API for fetching recipe data.
+### Features
 
-## Features
-
-- **Search for recipes by name**
-- **Filter recipes by difficulty level** (Easy, Medium, Hard)
-- **View detailed information about each recipe**
-- **Pagination** for navigating through multiple pages of recipes
-- **Responsive design** for mobile and desktop views
-
-## Technologies Used
-
+- Search for recipes by name
+- Filter recipes by difficulty level (Easy, Medium, Hard)
+- View detailed information about each recipe
+- Pagination for navigating through multiple pages of recipes
+- Responsive design for mobile and desktop views
+  
+### Technologies Used
+- Next.js
 - React
-- React Router
 - styled-components
-- Custom API for fetching recipes
+- Dummy API for fetching recipes
+  
+### License
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Acknowledgements
-
-- I had fun.
+### Acknowledgements
+I had fun... again.

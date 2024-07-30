@@ -1,13 +1,8 @@
-import axios from "axios";
-
-const fetchRecipe = async (id) => {
-  try {
-    const response = await axios.get(`https://dummyjson.com/recipes/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return [];
+// ../../../services/fetchRecipe.js
+export default async function fetchRecipe(id) {
+  const res = await fetch(`https://dummyjson.com/recipes/${id}`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch recipe");
   }
-};
-
-export default fetchRecipe;
+  return await res.json();
+}

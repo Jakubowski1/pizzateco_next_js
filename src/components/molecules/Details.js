@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import fetchRecipe from "../../services/fetchRecipe";
 import logo from "../../assets/header.png";
-import Header from "./Header";
-import RecipeImage from "./RecipeImage";
+import Header from "../atoms/Header";
+import RecipeImage from "../atoms/RecipeImage";
 import RecipeInfo from "./RecipeInfo";
-import RecipeInstructions from "./RecipeInstructions";
+import RecipeInstructions from "../atoms/RecipeInstructions";
 import RecipeIngredients from "./RecipeIngredients";
 import {
   Main,
@@ -50,7 +50,7 @@ export default function Details() {
     <>
       <Container>
         <BackButton onClick={() => navigate(-1)}>Go back</BackButton>
-        <Logo src={logo} alt="logo" />
+        <Logo src={logo.src} alt="logo" />
       </Container>
       <Main>
         <FlexRow>

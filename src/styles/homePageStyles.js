@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
-export const Container = styled.ul`
+export const Container = styled.div`
   font-family: "Nunito Sans", sans-serif;
   display: flex;
   flex-wrap: wrap;
@@ -11,7 +11,7 @@ export const Container = styled.ul`
   row-gap: 40px;
 `;
 
-export const Image = styled.img`
+export const BackgroundImage = styled.img`
   width: 100%;
   height: 300px;
   object-fit: cover;
@@ -22,7 +22,7 @@ export const StyledLink = styled(Link)`
   color: inherit;
 `;
 
-const blink = keyframes`
+export const blink = keyframes`
   50% {
     opacity: 0.3;
   }
@@ -34,4 +34,15 @@ export const Footer = styled.div`
   padding: 20px;
   font-size: 50px;
   animation: ${blink} 1s ease-in infinite;
+`;
+
+export const NoRecipesMessage = styled.p`
+  font-family: "Just Me Again Down Here", cursive;
+  font-size: 80px;
+  margin: 250px 0 100px 0;
+  text-align: center;
+`;
+
+export const EmptySpace = styled.div`
+  margin: 20px;
 `;

@@ -3,14 +3,12 @@ import cuisine from "../../assets/cuisine.png";
 import cooking from "../../assets/time.png";
 import level from "../../assets/level.png";
 import serving from "../../assets/servings.png";
-import {
-  Info,
-  InfoItem,
-  Icon,
-  Tag,
-  Difficulty,
-  Box,
-} from "../../styles/detailStyles";
+import Icon from "../atoms/Icon";
+import DifficultyTag from "../atoms/DifficultyTag";
+import Tag from "../atoms/Tag";
+import Box from "../atoms/Box";
+import InfoItem from "../atoms/InfoItem";
+import Info from "../atoms/Info";
 
 const RecipeInfo = ({ recipe }) => {
   const difficultyColors = {
@@ -28,29 +26,31 @@ const RecipeInfo = ({ recipe }) => {
     <Info>
       <InfoItem>
         <Box>
-          <Icon src={level} alt="icon" />
+          <Icon src={level.src} alt="icon" />
           Level
         </Box>
-        <Difficulty color={difficultyColor}>{recipe.difficulty}</Difficulty>
+        <DifficultyTag color={difficultyColor}>
+          {recipe.difficulty}
+        </DifficultyTag>
       </InfoItem>
       <InfoItem>
         <Box>
-          <Icon src={serving} alt="icon" />
+          <Icon src={serving.src} alt="icon" />
           Servings
         </Box>
-        <Tag>{recipe.servings}</Tag>
+        <Tag color="#C64F00">{recipe.servings}</Tag>
       </InfoItem>
       <InfoItem>
         <Box>
-          <Icon src={cuisine} alt="icon" /> Cuisine
+          <Icon src={cuisine.src} alt="icon" /> Cuisine
         </Box>
-        <Tag color="#244FE9">{recipe.cuisine}</Tag>
+        <Tag color="#D20C0C">{recipe.cuisine}</Tag>
       </InfoItem>
       <InfoItem>
         <Box>
-          <Icon src={cooking} alt="photo" /> Cooking Time
+          <Icon src={cooking.src} alt="photo" /> Cooking Time
         </Box>
-        <Tag color="#D20C0C">{recipe.cookTimeMinutes} min</Tag>
+        <Tag color="#244FE9">{recipe.cookTimeMinutes} min</Tag>
       </InfoItem>
     </Info>
   );

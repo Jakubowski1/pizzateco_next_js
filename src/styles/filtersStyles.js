@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { shouldForwardProp } from "@styled-system/should-forward-prop";
 
 export const Button = styled.button.withConfig({
   shouldForwardProp: (prop) =>

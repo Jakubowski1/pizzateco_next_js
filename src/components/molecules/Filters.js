@@ -25,7 +25,7 @@ const Filters = ({
   return (
     <FlexContainer>
       <SearchBoxWrapper>
-        <LoupeIcon src={loupe} alt="search" />
+        <LoupeIcon src={loupe.src} alt="search" />
         <SearchInput
           type="text"
           onChange={(e) => setQuery(e.target.value)}
@@ -91,7 +91,7 @@ const Filters = ({
           <option value="2">Medium</option>
           <option value="3">Hard</option>
         </Select>
-        <ArrowIcon src={arrow} open={open} />
+        <ArrowIcon src={arrow.src} open={open} />
       </SelectContainer>
     </FlexContainer>
   );

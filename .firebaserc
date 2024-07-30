@@ -1,9 +1,0 @@
-{
-  "projects": {
-    "default": "pizzateco1",
-    "pizzateco1": "pizzateco1"
-  },
-  "targets": {},
-  "etags": {},
-  "dataconnectEmulatorConfig": {}
-}

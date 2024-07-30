@@ -15,8 +15,7 @@
 
 ## Technologies Used
 
-- React
-- React Router
+- Next.js
 - styled-components
 - Custom API for fetching recipes
 
@@ -26,4 +25,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Acknowledgements
 
-- I had fun.
+- I had fun again
